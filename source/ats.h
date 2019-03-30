@@ -95,9 +95,11 @@ public:
 	bool Space;
 	int LongTimer;
 	int PsTimer;
-	int SpeedTimer;
+	int SpeedTimer0;
+	int SpeedTimer1;
 	int SpeedTimer2;
 	int SpeedTimer3;
+	int SpeedTimer4;
 	int bell;
 	int chime;
 	int chimeR;
