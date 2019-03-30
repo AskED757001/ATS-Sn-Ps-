@@ -124,7 +124,12 @@ void SnBeacon(int Type, int Signal, int Optional)
 			if (!Sn.ATSBrake)
 				Sn.LongTimer = time - 5000;
 		}
-		else if (Optional != 0 && Sn.SpeedTimer3 > time)
+		else if (Optional == 1 && Sn.SpeedTimer3 > time && Signal == 0)
+		{
+			if (!Sn.ATSBrake)
+				Sn.LongTimer = time - 5000;
+		}
+		else if (Optional == 2 && Sn.SpeedTimer3 > time)
 		{
 			if (!Sn.ATSBrake)
 				Sn.LongTimer = time - 5000;
@@ -137,54 +142,54 @@ void SnBeacon(int Type, int Signal, int Optional)
 	}
 	if (Type == 12)
 	{
-		if (Sn.SpeedTimer == 0 && Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
+		if (Optional < speed && Optional > 0 && Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
 		{
+			if (!Sn.ATSBrake)
+				Sn.LongTimer = time - 5000;
+		}
+		else if (Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
+		{
+			if (Sn.SpeedTimer > time)
+			{
+				if (!Sn.ATSBrake)
+					Sn.LongTimer = time - 5000;
+			}
 			Sn.SpeedTimer = time + g_ini.DATA.SnSpeedTimer;
-		}
-		else if (Sn.SpeedTimer > time && Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
-		{
-			if (!Sn.ATSBrake)
-				Sn.LongTimer = time - 5000;
-		}
-		else if (Optional < speed && Optional > 0 && Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
-		{
-			if (!Sn.ATSBrake)
-				Sn.LongTimer = time - 5000;
 		}
 	}
 	if (Type == 50)
 	{
-		if (Sn.SpeedTimer == 0 && Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
+		if (Optional == 0)
 		{
+			if (Sn.SpeedTimer > time)
+			{
+				if (!Sn.ATSBrake)
+					Sn.LongTimer = time - 5000;
+			}
 			Sn.SpeedTimer = time + g_ini.DATA.SnSpeedTimer;
 		}
-		else if (Sn.SpeedTimer == 0 && Optional == 0)
+		else if (Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
 		{
+			if (Sn.SpeedTimer > time)
+			{
+				if (!Sn.ATSBrake)
+					Sn.LongTimer = time - 5000;
+			}
 			Sn.SpeedTimer = time + g_ini.DATA.SnSpeedTimer;
-		}
-		else if (Sn.SpeedTimer > time && Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
-		{
-			if (!Sn.ATSBrake)
-				Sn.LongTimer = time - 5000;
-		}
-		else if (Sn.SpeedTimer > time && Optional == 0)
-		{
-			if (!Sn.ATSBrake)
-				Sn.LongTimer = time - 5000;
 		}
 	}
 	if (Type == 55)
 	{
 		if (Optional == 0)
 		{
-			if (Sn.SpeedTimer == 0 && Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
+			if (Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
 			{
+				if (Sn.SpeedTimer > time)
+				{
+					if (!Sn.ATSBrake)
+						Sn.LongTimer = time - 5000;
+				}
 				Sn.SpeedTimer = time + g_ini.DATA.SnSpeedTimer;
-			}
-			else if (Sn.SpeedTimer > time && Signal == 0 && Ps.Pa1 == 0 && Ps.Pb1 == 0)
-			{
-				if (!Sn.ATSBrake)
-					Sn.LongTimer = time - 5000;
 			}
 		}
 		else
