@@ -142,7 +142,10 @@ void PsRun(double deltaL)
 		Ps.PatternSpeed = Ps.Yudo;
 
 	
-	if (PsWarning(Ps.Pa1, speed, 0, g_ini.DATA.Speedmeter - 5, Ps.Basedecelerate, g_ini.DATA.Margin)
+	if (
+		speed > g_ini.DATA.PsMaxspeed - 5 + Ps.PEnabled * 1000 && Ps.PsLamp
+		|| Ps.P3 != 0 && speed > 10 && Ps.PsLamp || Ps.Irekae != 0 && speed > Ps.Irekae - 5 && Ps.PsLamp || Ps.Yudo != 0 && speed > Ps.Yudo - 5 && Ps.PsLamp
+		|| PsWarning(Ps.Pa1, speed, 0, g_ini.DATA.Speedmeter - 5, Ps.Basedecelerate, g_ini.DATA.Margin)
 		|| PsWarning(Ps.Pb1, speed, 0, g_ini.DATA.Speedmeter - 5, Ps.Basedecelerate, g_ini.DATA.Margin)
 		|| PsWarning(Ps.Pa2, speed, 0, 5, Ps.deceleratePa, g_ini.DATA.Margin)
 		|| PsWarning(Ps.Pb2, speed, 0, 5, Ps.deceleratePb, g_ini.DATA.Margin)
@@ -153,9 +156,8 @@ void PsRun(double deltaL)
 		|| PsWarning(Ps.Pitch1, speed, Ps.Pitch1Speed, Ps.Pitch1Speed - 5, Ps.Basedecelerate, 0)
 		|| PsWarning(Ps.Pitch2, speed, Ps.Pitch2Speed, Ps.Pitch2Speed - 5, Ps.Basedecelerate, 0)
 		|| PsWarning(Ps.Rinji1, speed, Ps.Rinji1Speed, Ps.Rinji1Speed - 5, Ps.Basedecelerate, 0)
-		|| PsWarning(Ps.Rinji1, speed, Ps.Rinji2Speed, Ps.Rinji2Speed - 5, Ps.Basedecelerate, 0)
-		|| Ps.P3 != 0 && speed > 10 && Ps.PsLamp || Ps.Irekae != 0 && speed > Ps.Irekae - 5 && Ps.PsLamp || Ps.Yudo != 0 && speed > Ps.Yudo - 5 && Ps.PsLamp
-		|| speed > g_ini.DATA.PsMaxspeed - 5 + Ps.PEnabled * 1000 && Ps.PsLamp)
+		|| PsWarning(Ps.Rinji2, speed, Ps.Rinji2Speed, Ps.Rinji2Speed - 5, Ps.Basedecelerate, 0)
+		)
 	{
 		if (!Ps.WarningLamp)
 			Ps.Warning = ATS_SOUND_PLAY;
