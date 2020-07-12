@@ -11,6 +11,9 @@ void SnInit(int Param)
 	Sn.SpeedTimer4 = 0;
 	Sn.chimeX = 0;
 	Sn.chimeLR = false;
+	Sn.chimeL = ATS_SOUND_CONTINUE;
+	Sn.chimeR = ATS_SOUND_CONTINUE;
+	Sn.chime = ATS_SOUND_STOP;
 	if (Param == 0)
 	{
 		Sn.ATSPower = false;

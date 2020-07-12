@@ -49,7 +49,6 @@ BOOL WINAPI DllMain(
 	case DLL_PROCESS_DETACH:	
         break;
 	}
-
 	return true;
 }
 
@@ -114,7 +113,7 @@ ATS_HANDLES WINAPI atsElapse(ATS_VEHICLESTATE vs, int *p_panel, int *p_sound)
 	if (Reverser * vs.Speed < -7)
 		Ps.BrakeLamp = true;
 
-	if (g_ini.DATA.DIR != 0 && !pilotlamp)
+	if (g_ini.DATA.DIR != 0 && !pilotlamp || Ps.BrakeLamp || Sn.ATSBrake)
 		ret.Power = 0;
 	else
 		ret.Power = PowerNotch;
@@ -138,21 +137,21 @@ ATS_HANDLES WINAPI atsElapse(ATS_VEHICLESTATE vs, int *p_panel, int *p_sound)
 				PsInit(1);
 			Sn.PsTimer = 0;
 		}
+		PsRun(deltaL);
 		if (p_panel[6] == 1 || p_panel[53] != 0)
 			PsInit(0);
-		PsRun(deltaL);
 	}
 	if (g_ini.DATA.SnEnabled != 0)
 	{
-		if (BrakeNotch < emgBrake && p_panel[6] != 1)
+		if (BrakeNotch < emgBrake && p_panel[6] != 1 && p_panel[53] == 0)
 		{
 			SnStart();
 		if (Sn.PsTimer == 0)
 			Sn.PsTimer = time + 2700;
 		}
+		SnRun();
 		if (p_panel[6] == 1 || p_panel[53] != 0)
 			SnInit(0);
-		SnRun();
 	}
 	if (g_ini.DATA.EBEnabled != 0)
 	{
