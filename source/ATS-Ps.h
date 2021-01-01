@@ -95,7 +95,7 @@ void PsRun(double deltaL)
 	else
 		Ps.Ps2_ = 0;
 
-	Ps.PatternSpeed = Ps.PsSpeed + Ps.PEnabled * 1000;
+	Ps.PatternSpeed = Ps.PsSpeed + Ps.PEnabled * 1000 * g_ini.DATA.PPrimary;
 	if (Ps.PatternSpeed > PsPatternSig(Ps.Pa1, g_ini.DATA.Speedmeter, Ps.Basedecelerate) && Ps.Pa1 != 0)
 		Ps.PatternSpeed = PsPatternSig(Ps.Pa1, g_ini.DATA.Speedmeter, Ps.Basedecelerate);
 
@@ -143,7 +143,7 @@ void PsRun(double deltaL)
 
 	
 	if (
-		speed > g_ini.DATA.PsMaxspeed - 5 + Ps.PEnabled * 1000 && Ps.PsLamp
+		speed > g_ini.DATA.PsMaxspeed - 5 + Ps.PEnabled * 1000 * g_ini.DATA.PPrimary && Ps.PsLamp
 		|| Ps.P3 != 0 && speed > 10 && Ps.PsLamp || Ps.Irekae != 0 && speed > Ps.Irekae - 5 && Ps.PsLamp || Ps.Yudo != 0 && speed > Ps.Yudo - 5 && Ps.PsLamp
 		|| PsWarning(Ps.Pa1, speed, 0, g_ini.DATA.Speedmeter - 5, Ps.Basedecelerate, g_ini.DATA.Margin)
 		|| PsWarning(Ps.Pb1, speed, 0, g_ini.DATA.Speedmeter - 5, Ps.Basedecelerate, g_ini.DATA.Margin)

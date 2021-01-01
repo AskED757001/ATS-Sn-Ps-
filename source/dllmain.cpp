@@ -1,4 +1,7 @@
-﻿#include "ATSIni.h"
+﻿//マルチスレッドDLLでビルドするとランタイムが必要だが軽くなる　MS推奨
+
+
+#include "ATSIni.h"
 #include "ats.h"
 #include "dllmain.hpp"
 #include "ATS-Sn.h"

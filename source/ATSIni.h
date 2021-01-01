@@ -119,6 +119,7 @@ public:
         int      DIR;
         int      Margin;
 		int      ATSStart;
+        int      PPrimary;
 		string_t Version;
     } DATA;
 
@@ -144,6 +145,7 @@ protected:
         inimoni::inirw( r,f,s, _T("Margin           "), DATA.Margin        );
 		inimoni::inirw(r, f, s, _T("EBEnabled"), DATA.EBEnabled);
 		inimoni::inirw(r, f, s, _T("ATSStart"), DATA.ATSStart);
+		inimoni::inirw(r, f, s, _T("PPrimary"), DATA.PPrimary);
 		if(r == 0)
 		inimoni::inirw(r, f, s, _T("Version           "), DATA.Version);
         return true;                                                    
@@ -161,9 +163,10 @@ protected:
         DATA.SnSpeedTimer            = 550;
         DATA.DIR                     = 0;
         DATA.Margin                  = 10;
-		DATA.EBEnabled = 0;
-		DATA.ATSStart = 1;
-		DATA.Version = _T("ver.2.90");
+		DATA.EBEnabled               = 0;
+		DATA.ATSStart                = 1;
+        DATA.PPrimary                = 1;
+		DATA.Version = _T("ver.3.00");
     }                                                                   
 };
 typedef ATSIni ATSFile; //êVãåå›ä∑
